@@ -40,6 +40,8 @@ void init(int& shmid, int& msqid, void*& sharedMemPtr)
 		    is unique system-wide among all System V objects. Two objects, on the other hand,
 		    may have the same key.
 	 */
+
+	// DONE!!!
 	key_t key;
 
 	if ((key = ftok("keyfile.txt", 'a')) == -1) {
@@ -52,6 +54,7 @@ void init(int& shmid, int& msqid, void*& sharedMemPtr)
 	/* TODO: Create a message queue */
 	/* Store the IDs and the pointer to the shared memory region in the corresponding parameters */
 
+	// DONE!!!
 	if ((shmid = shmget(key, SHARED_MEMORY_CHUNK_SIZE,0644 | IPC_CREAT)) == -1) {
 		perror("shmget");
 		exit(1);
@@ -138,7 +141,9 @@ void mainLoop()
  */
 
 void cleanUp(const int& shmid, const int& msqid, void* sharedMemPtr)
-{
+{	
+	// ALL DONE!!!
+
 	/* TODO: Detach from shared memory */
 	if (shmdt(sharedMemPtr) == -1) {
         perror("shmdt");
@@ -153,6 +158,7 @@ void cleanUp(const int& shmid, const int& msqid, void* sharedMemPtr)
 		exit(1);
 	}
 
+	// ALL DONE!!!
 }
 
 /**
