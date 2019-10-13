@@ -1,4 +1,3 @@
-#include <csignal>
 #include <sys/shm.h>
 #include <sys/msg.h>
 #include <signal.h>
@@ -55,7 +54,7 @@ void init(int& shmid, int& msqid, void*& sharedMemPtr)
 	/* Store the IDs and the pointer to the shared memory region in the corresponding parameters */
 
 	// DONE!!!
-	if ((shmid = shmget(key, SHARED_MEMORY_CHUNK_SIZE,0644 | IPC_CREAT)) == -1) {
+	if ((shmid = shmget(key, SHARED_MEMORY_CHUNK_SIZE,0644)) == -1) {
 		perror("shmget");
 		exit(1);
 	}
@@ -66,7 +65,7 @@ void init(int& shmid, int& msqid, void*& sharedMemPtr)
 		exit(1);
 	}
 	
-	if ((msqid = msgget(key, 0666 | IPC_CREAT)) == -1) {
+	if ((msqid = msgget(key, 0666)) == -1) {
 		perror("ftok");
 		exit(1);
 	}
