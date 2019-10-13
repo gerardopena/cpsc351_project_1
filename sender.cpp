@@ -4,7 +4,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include "msg.h"    /* For the message struct */
- /* The size of the shared memory chunk */
+
+/* The size of the shared memory chunk */
 #define SHARED_MEMORY_CHUNK_SIZE 1000
 
 /* The ids for the shared memory segment and the message queue */
@@ -32,6 +33,8 @@ void init(int& shmid, int& msqid, void*& sharedMemPtr)
 		    is unique system-wide among all SYstem V objects. Two objects, on the other hand,
 		    may have the same key.
 	 */
+
+	// DONE!!!
 	key_t key;
 	
 	if ((key = ftok("keyfile.txt", 'a')) == -1) {
@@ -43,6 +46,8 @@ void init(int& shmid, int& msqid, void*& sharedMemPtr)
 	/* TODO: Attach to the shared memory */
 	/* TODO: Attach to the message queue */
 	/* Store the IDs and the pointer to the shared memory region in the corresponding parameters */
+
+	// DONE!!!
 	if ((shmid = shmget(key, SHARED_MEMORY_CHUNK_SIZE,0644 | IPC_CREAT)) == -1) {
 		perror("shmget");
 		exit(1);
@@ -70,6 +75,12 @@ void init(int& shmid, int& msqid, void*& sharedMemPtr)
 void cleanUp(const int& shmid, const int& msqid, void* sharedMemPtr)
 {
 	/* TODO: Detach from shared memory */
+	
+	// DONE!!!
+	if (shmdt(sharedMemPtr) == -1) {
+        perror("shmdt");
+        exit(1);
+    }
 }
 
 /**

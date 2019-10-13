@@ -7,7 +7,6 @@
 #include <unistd.h>
 #include "msg.h"    /* For the message struct */
 
-
 /* The size of the shared memory chunk */
 #define SHARED_MEMORY_CHUNK_SIZE 1000
 
@@ -146,8 +145,14 @@ void cleanUp(const int& shmid, const int& msqid, void* sharedMemPtr)
         exit(1);
     }
 	/* TODO: Deallocate the shared memory chunk */
-	
+	shmctl(shmid, IPC_RMID, NULL);
+
 	/* TODO: Deallocate the message queue */
+	if((msgctl(msqid, IPC_RMID, NULL)) == -1) {
+		perror("msgctl");
+		exit(1);
+	}
+
 }
 
 /**
