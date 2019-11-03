@@ -171,7 +171,6 @@ void mainLoop()
 			}
 
 			sndMsg.mtype = RECV_DONE_TYPE;
-			sndMsg.size = 0;
 
 			/* TODO: Tell the sender that we are ready for the next file chunk.
  			 * I.e. send a message of type RECV_DONE_TYPE (the value of size field
