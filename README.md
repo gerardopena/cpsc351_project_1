@@ -1,12 +1,12 @@
 # cpsc351_project_1
 
-Gerardo Pena Canchola gerardopenacanchola@csu.fullerton.edu
+Gerardo Pena Canchola gerardopena23@csu.fullerton.edu
 
 Austin Murrell Austin@csu.fullerton.edu
 
 Rushi Sharma rushisharma@csu.fullerton.edu
 
-Brandon Le le.brandon@gmail.com
+Brandon Le fxslick@csu.fullerton.edu 
 
 Programming Lanugage Used: C++
 
