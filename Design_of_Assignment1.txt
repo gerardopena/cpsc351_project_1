@@ -1,0 +1,189 @@
+recv.cpp
+
+SHARED_MEMORY_CHUNK_SIZE=1000
+int shmid, msqid
+void sharedMemPtr
+const char recvFileName[]="output.txt"
+message sndMsg, rcvMsg
+
+define init(shmid, msqid, sharedMemPtr) {
+	key=ftok
+	if key==-1
+		perror statement
+		exit
+	else
+		success statement
+		exit
+	shmid=shmget
+	if shmid==-1
+		perror statement
+		exit
+	else
+		success statement
+		exit
+	sharedMemPtr=shmat
+	if shmat==-1
+		perror statement
+		exit
+	else
+		success statement
+		exit
+	msqid=msgget
+	if msqid==-1
+		perror statement
+		exit
+	else	
+		success statement
+		exit
+}
+
+define mainLoop {
+	msgSize=0
+	FILE *fp=fopen(recvFileName, "w")
+	if !fp
+		perror statement
+		exit
+	else
+		success statement
+	if(msgrcv=-1)
+		perror statement
+		exit
+	else	
+		success statement
+	msgSize=rcvMsg.size
+	if msgSize!=0
+		while msgSize!=0
+			if fwrite < 0
+				perror statement
+			else
+				success statement
+			sndMsg.mtype = RECV_DONE_TYPE
+			if msgsnd==-1
+				perror statement
+			else	
+				success statement
+			if msgrcv==-1
+				perror statement
+			else	
+				success statement
+			msgSize=rcvMsg.size
+	else
+		fclose fp
+	
+}
+
+define cleanup(shmid, msqid, sharedMemPtr) {
+	if shmdt==-1
+		perror statement
+		exit
+	else 
+		success statement
+	if shmctl==-1
+		perror statement
+	else	
+		success statement
+	if msgctl==-1
+		perror statement 
+	else 
+		success statement
+}
+
+define ctrlCSignal(signal) {
+	cleanup(shmid, msqid, sharedMemPtr)
+}
+
+define main(argc, argv) {
+	signal(SIGINT, ctrlCSignal)
+	init(shmid, msqid, sharedMemPtr)
+	mainLoop()
+	cleanup(shmid, msqid, sharedMemPtr)
+	return 0
+}
+
+sender.cpp
+SHARED_MEMORY_CHUNK_SIZE=1000
+int shmid, msqid
+void sharedMemPtr
+
+define init(shmid, msqid, sharedMemPtr) {
+	key=ftok
+	if key==-1
+		perror statement
+		exit
+	else
+		success statement
+		exit
+	shmid=shmget(IPC_CREAT)
+	if shmid==-1
+		perror statement
+		exit
+	else
+		success statement
+		exit
+	sharedMemPtr=shmat
+	if shmat==-1
+		perror statement
+		exit
+	else
+		success statement
+		exit
+	msqid=msgget(IPC_CREAT)
+	if msqid==-1
+		perror statement
+		exit
+	else	
+		success statement
+		exit
+}
+define cleanup(shmid, msqid, sharedMemPtr) {
+	if shmdt==-1
+		perror statement
+		exit
+	else 
+		success statement
+}
+
+define send(fileName) {
+	FILE* fp=fopen(fileName, "r")
+	message sndMsg, rcvMsg
+	if !fp
+		perror statement
+		exit
+	else
+		success statement
+	
+	while !feof(fp)
+		if sndMsg.size=fread < 0
+			perror statement
+			
+		sndMsg.mtype=SENDER_DATA_TYPE
+		
+		if msgsnd==-1
+			perror statement
+		else
+			success statement
+		if msgrcv==-1
+			perror statement
+		else
+			success statement
+	
+	sndMsg.size=0
+	sndMsg.mtype=SENDER_DATA_TYPE
+	if msgsnd==-1
+		perror statement
+	else
+		success statement
+	fclose(fp)
+	
+define main(argc, argv) {
+	if argc < 2
+		print usage statement
+	
+	init(shmid, msquid, sharedMemPtr)
+	send(argv[1])
+	cleanup(shmid, msqid, sharedMemPtr)
+	return 0
+}
+		
+
+	
