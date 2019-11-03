@@ -34,11 +34,11 @@ void init(int& shmid, int& msqid, void*& sharedMemPtr)
 	*/
 
 			//creating the file and adding the string "Hello world" to the file
-		 	 ofstream outfile;
-		 	 outfile.open("keyfile.txt");
-		 	 outfile << "Hello world";
-		 	 outfile.close();
-
+		 	 
+			ofstream outfile;
+			outfile.open("keyfile.txt");
+			outfile << "Hello world";
+			outfile.close();
 			 /*
 				Alternative method:
 		 		printf("Hello world");
@@ -140,6 +140,7 @@ void send(const char* fileName)
 
 		/* TODO: Send a message to the receiver telling him that the data is ready
  		 * (message of type SENDER_DATA_TYPE)*/
+		 sndMsg.mtype = SENDER_DATA_TYPE;
 		 msgsnd(msqid, &sndMsg, sizeof(message)- sizeof(long), 0);
 		 //Alterate way: msgsnd(msgid, &sndMsg, sizeof(sndMsg)- sizeof(long), 0);
 
@@ -155,7 +156,6 @@ void send(const char* fileName)
  	  * Lets tell the receiver that we have nothing more to send. We will do this by
  	  * sending a message of type SENDER_DATA_TYPE with size field set to 0.
 	  */
-
 		sndMsg.size = 0;
 		msgsnd(msqid, &sndMsg, sizeof(message)- sizeof(long), 0);
 		//Alterate way: msgsnd(msgid, &sndMsg, sizeof(sndMsg)- sizeof(long), 0);

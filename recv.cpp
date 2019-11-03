@@ -20,7 +20,7 @@ int shmid, msqid;
 void *sharedMemPtr;
 
 /* The name of the received file */
-const char recvFileName[] = "keyfile.txt";
+const char recvFileName[] = "recvfile";
 
 /* Initializing buffers */
 message sndMsg;
@@ -205,8 +205,8 @@ void mainLoop()
 	{
 		/* Close the file */
 		fclose(fp);
-		cout << "Memory size is 0. File closed." << endl;
 	}
+	cout << "Memory size is 0. File closed." << endl;
 	fclose(fp);
 }
 

@@ -11,9 +11,10 @@ Brandon Le le.brandon@gmail.com
 Programming Lanugage Used: C++
 
 How To Execute The Program:
+
 1.) Open a Linux terminal
 
-2.) Build the program
+2.) Build the program using the command make on terminal
 
 3.) Enter ./sender keyfile.txt to run sender program
 
