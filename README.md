@@ -27,3 +27,5 @@ How To Execute The Program:
 Extra Credit: We did not do the extra credit.
 
 Teamwork: For the collaboration for this project we met outside the classroom once as a whole to discuss our team roles, then we seperated into twos to finishes our goals together. We used discord to communicate to each other and a groupchat with our groupmates.
+
+![Screenshot_2019-11-02_18-18-38](https://user-images.githubusercontent.com/35822482/68079738-be923a80-fdab-11e9-8566-ae004459b522.png)
