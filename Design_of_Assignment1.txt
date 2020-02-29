@@ -6,7 +6,7 @@ void sharedMemPtr
 const char recvFileName[]="output.txt"
 message sndMsg, rcvMsg
 
-define init(shmid, msqid, sharedMemPtr) {
+def init(shmid, msqid, sharedMemPtr) {
 	key=ftok
 	if key==-1
 		perror statement
@@ -37,7 +37,7 @@ define init(shmid, msqid, sharedMemPtr) {
 		exit
 }
 
-define mainLoop {
+def mainLoop {
 	msgSize=0
 	FILE *fp=fopen(recvFileName, "w")
 	if !fp
@@ -72,7 +72,7 @@ define mainLoop {
 	
 }
 
-define cleanup(shmid, msqid, sharedMemPtr) {
+def cleanup(shmid, msqid, sharedMemPtr) {
 	if shmdt==-1
 		perror statement
 		exit
@@ -88,7 +88,7 @@ define cleanup(shmid, msqid, sharedMemPtr) {
 		success statement
 }
 
-define ctrlCSignal(signal) {
+def ctrlCSignal(signal) {
 	cleanup(shmid, msqid, sharedMemPtr)
 }
 
@@ -105,7 +105,7 @@ SHARED_MEMORY_CHUNK_SIZE=1000
 int shmid, msqid
 void sharedMemPtr
 
-define init(shmid, msqid, sharedMemPtr) {
+def init(shmid, msqid, sharedMemPtr) {
 	key=ftok
 	if key==-1
 		perror statement
@@ -135,7 +135,7 @@ define init(shmid, msqid, sharedMemPtr) {
 		success statement
 		exit
 }
-define cleanup(shmid, msqid, sharedMemPtr) {
+def cleanup(shmid, msqid, sharedMemPtr) {
 	if shmdt==-1
 		perror statement
 		exit
@@ -143,7 +143,7 @@ define cleanup(shmid, msqid, sharedMemPtr) {
 		success statement
 }
 
-define send(fileName) {
+def send(fileName) {
 	FILE* fp=fopen(fileName, "r")
 	message sndMsg, rcvMsg
 	if !fp
@@ -175,7 +175,7 @@ define send(fileName) {
 		success statement
 	fclose(fp)
 	
-define main(argc, argv) {
+def main(argc, argv) {
 	if argc < 2
 		print usage statement
 	
@@ -184,6 +184,3 @@ define main(argc, argv) {
 	cleanup(shmid, msqid, sharedMemPtr)
 	return 0
 }
-		
-
-	
