@@ -92,7 +92,7 @@ def ctrlCSignal(signal) {
 	cleanup(shmid, msqid, sharedMemPtr)
 }
 
-define main(argc, argv) {
+def main(argc, argv) {
 	signal(SIGINT, ctrlCSignal)
 	init(shmid, msqid, sharedMemPtr)
 	mainLoop()
